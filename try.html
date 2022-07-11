@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<style>
+</style>
+<body>
+<div style="text-align:center" class="col-sm-2">
+    <h1> Lin's Family </h1>
+    <button type="button" id="addmember">Add Member</button>
+    <button type="button" onclick="editMember()">Edit Member</button>
+    <button type="button" onclick="delMember()">Delete Member</button>
+    <button type="button" onclick="findMember()">Find Member</button>
+    <button type="button" onclick="showGraph()">Show Graph</button>
+    <h4 id="status">Please pick your choice</h4>
+</div>
+<script>
+document.getElementById("addmember").addEventListener('click', function(){
+   console.log("pass2");
+   document.getElementById("status").innerHTML = "\n";
+   var val1 = document.createElement('input');
+   val1.type = 'text';
+   val1.id = 'parname';
+   val1.placeholder = 'parent, in Lin\'s family';
+   var val2 = document.createElement('input');
+   val2.type = 'text';
+   val2.id = 'childname';
+   val2.placeholder = 'new member\'s name';
+   var btn = document.createElement('button');
+   btn.type = 'button';
+   btn.id = 'submit';
+   btn.innerHTML = 'Submit';
+   var note = document.createElement('h4');
+   note.id = 'note';
+   btn.onclick = function() {
+       var text1 = document.getElementById('parname').value;
+       var text2 = document.getElementById('childname').value;
+       document.getElementById("note").append(text1);
+       document.getElementById("note").append("\n");
+       document.getElementById("note").append(text2);
+   };
+   
+   var container = document.getElementById("status");
+   container.append(val1);
+   container.append(val2);
+   container.append(btn);
+   container.append(note);
+}, false)
+
+</script>
+</body>
+</html>
