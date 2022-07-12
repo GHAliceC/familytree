@@ -26,7 +26,7 @@ class Utils:
         queue.append(root)
 
         # Iterate over the queue until it's empty
-        while queue:
+        while len(queue) > 0:
             # Check the length of queue
             currSize = len(queue)
             currList = []
@@ -34,14 +34,13 @@ class Utils:
             while currSize > 0:
                 # Dequeue element
                 currNode = queue.popleft()
-                #             currList.append(currNode.name)
+                # currList.append(currNode.name)
                 currList.append(currNode)
                 currSize -= 1
 
                 # Check for child list
-                if currNode.child != []:
-                    for ch in currNode.child:
-                        queue.append(ch)
+                for ch in currNode.child:
+                    queue.append(ch)
 
             # Append the currList to answer after each iteration
             ans.append(currList)
@@ -50,13 +49,11 @@ class Utils:
         return ans
 
     def write2txt(self,
-                  root: Node,
-                  filename: str = "linfamily.txt"
+                  lst: List,
+                  filename: str = "static/linfamily.txt"
                   ) -> bool:
-        if root is None:
-            return False
+        print(lst)
         try:
-            lst = self.levelOrderTraversal(root)
             with open(os.path.join(cwd, filename), "w") as f:
                 line = ""
                 for n in range(len(lst)):
