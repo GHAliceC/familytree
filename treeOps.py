@@ -19,18 +19,13 @@ class TreeOps(Utils):
 
         stack = []
         stack.append(self.root)
-
-        while stack:
+        while len(stack) > 0:
             currNode = stack.pop()
-            print("running member:", currNode.name)
             if currNode.name == parname:
                 return currNode
-
-            if currNode.child != []:
-                for ch in currNode.child:
-                    stack.append(ch)
-
-        return currNode
+            for ch in currNode.child:
+                stack.append(ch)
+        return None
 
     def addchild(self,
                  parent: Node,
@@ -44,19 +39,16 @@ class TreeOps(Utils):
         # print("childname:", childname, "childspouse:", childspouse, "grandchild:", grandchild, "bros:", parent.child)
         member = Node(childname)
         member.spouse = childspouse
-        print("child:", member.name, member.spouse)
 
         for grdchild in grandchild:
             member.child.append(Node(grdchild))
 
-        print("parent.child:", parent.name, parent.child)
         for ch in parent.child:
             if ch.name == childname:
                 return True
 
         parent.child.append(member)
         self.storeTree(self.root)
-
         return True
 
     def editnode(self,
