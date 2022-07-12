@@ -1,50 +1,202 @@
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
+<link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- Ajax文件 -->
+<script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <style>
+
 </style>
 <body>
-<div style="text-align:center" class="col-sm-2">
-    <h1> Lin's Family </h1>
-    <button type="button" id="addmember">Add Member</button>
-    <button type="button" onclick="editMember()">Edit Member</button>
-    <button type="button" onclick="delMember()">Delete Member</button>
-    <button type="button" onclick="findMember()">Find Member</button>
-    <button type="button" onclick="showGraph()">Show Graph</button>
-    <h4 id="status">Please pick your choice</h4>
+<div class="container" style="width: 600px;">
+    <div style=" text-align: center;">
+        <h1> Lin's Family </h1>
+        <button type="button" class="btn btn-default" id="addMemberBtn">Add Member</button>
+        <br><br>
+        <button type="button" class="btn btn-default" id="editMemberBtn">Edit Member</button>
+        <br><br>
+        <button type="button" class="btn btn-default" id="delMemberBtn">Delete Member</button>
+        <br><br>
+        <button type="button" class="btn btn-default" id="findMemberBtn">Search Member</button>
+        <br><br>
+        <button type="button" class="btn btn-default" id="viewGraphBtn">View Graph</button>
+        <br><br>
+        <div style="margin-top:25px;" id="warning" class="alert alert-info">Please pick your choice</div>
+    </div>
+
+    <div style="padding: 20px 20px 10px;" id="inputGroup" hidden>
+        <form class="bs-example bs-example-form" role="form">
+            <div class="input-group" id="parnameField">
+                <span class="input-group-addon">parname</span>
+                <input type="text" class="form-control" id="parname" placeholder="twitterhandle">
+            </div>
+
+            <div class="input-group" id="childnameField">
+                <span class="input-group-addon">childname</span>
+                <input type="text" class="form-control" id="childname" placeholder="twitterhandle">
+            </div>
+
+            <div class="input-group" id="newnameField">
+                <span class="input-group-addon">newchildname</span>
+                <input type="text" class="form-control" id="newchildname" placeholder="twitterhandle">
+            </div>
+
+            <div class="input-group" id="spousenameField">
+                <span class="input-group-addon">spousename</span>
+                <input type="text" class="form-control" id="childspouse" placeholder="twitterhandle">
+            </div>
+
+            <div class="input-group" id="grandchildField">
+                <span class="input-group-addon">grandchildren</span>
+                <input type="text" class="form-control" id="grandchildren" placeholder="twitterhandle">
+            </div>
+
+            <div class="input-group" id="bdateField">
+                <span class="input-group-addon">dateOfbirth</span>
+                <input type="text" class="form-control" id="birthdate" placeholder="YYYY-MM-DD">
+            </div>
+
+            <div class="input-group" id="ddateField">
+                <span class="input-group-addon">dateOfdeath</span>
+                <input type="text" class="form-control" id="deathdate" placeholder="YYYY-MM-DD">
+            </div>
+
+            <button class="btn btn-default" id="submitBtn">Click to submit</button>
+        </form>
+    </div>
 </div>
+
+
 <script>
-document.getElementById("addmember").addEventListener('click', function(){
-   console.log("pass2");
-   document.getElementById("status").innerHTML = "\n";
-   var val1 = document.createElement('input');
-   val1.type = 'text';
-   val1.id = 'parname';
-   val1.placeholder = 'parent, in Lin\'s family';
-   var val2 = document.createElement('input');
-   val2.type = 'text';
-   val2.id = 'childname';
-   val2.placeholder = 'new member\'s name';
-   var btn = document.createElement('button');
-   btn.type = 'button';
-   btn.id = 'submit';
-   btn.innerHTML = 'Submit';
-   var note = document.createElement('h4');
-   note.id = 'note';
-   btn.onclick = function() {
-       var text1 = document.getElementById('parname').value;
-       var text2 = document.getElementById('childname').value;
-       document.getElementById("note").append(text1);
-       document.getElementById("note").append("\n");
-       document.getElementById("note").append(text2);
-   };
-   
-   var container = document.getElementById("status");
-   container.append(val1);
-   container.append(val2);
-   container.append(btn);
-   container.append(note);
-}, false)
+$(document).ready(function(){
+
+    var func = "";
+
+    // 开始写 jQuery 代码...
+    $('#addMemberBtn').click(function(){
+
+        // if($('#warning').is(':hidden')){
+        //     $('#warning').show()
+        //     $('#inputGroup').hide()
+        // }else{
+            $('#warning').hide()
+            $('#inputGroup').show()
+            $('#newnameField').hide()
+            $('#spousenameField').show()
+            $('#grandchildField').show()
+            $('#bdateField').hide()
+            $('#ddateField').hide()
+            func = "addMember"
+        // }
+
+    });
+
+    $('#editMemberBtn').click(function(){
+
+        // if($('#warning').is(':hidden')){
+        //     $('#warning').show()
+        //     $('#inputGroup').hide()
+        // }else{
+            $('#warning').hide()
+            $('#inputGroup').show()
+            $('#newnameField').show()
+            $('#spousenameField').show()
+            $('#grandchildField').hide()
+            $('#bdateField').show()
+            $('#ddateField').show()
+            func = "editMember"
+        // }
+    });
+
+    $('#delMemberBtn').click(function(){
+
+        // if($('#warning').is(':hidden')){
+        //     $('#warning').show()
+        //     $('#inputGroup').hide()
+        // }else{
+            $('#warning').hide()
+            $('#inputGroup').show()
+            $('#newnameField').hide()
+            $('#spousenameField').hide()
+            $('#grandchildField').hide()
+            $('#bdateField').hide()
+            $('#ddateField').hide()
+            func = "delMember"
+        // }
+    });
+
+    $('#findMemberBtn').click(function(){
+
+        // if($('#warning').is(':hidden')){
+        //     $('#warning').show()
+        //     $('#inputGroup').hide()
+        // }else{
+            $('#warning').hide()
+            $('#inputGroup').show()
+            $('#newnameField').hide()
+            $('#spousenameField').hide()
+            $('#grandchildField').hide()
+            $('#bdateField').hide()
+            $('#ddateField').hide()
+            func = "findMember"
+        // }
+    });
+
+    $('#viewGraphBtn').click(function(){
+        var postlnk = "http://127.0.0.1:8000/view";
+        $.ajax({
+        type: 'POST',
+        url: postlnk,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        timeout: 200
+        })
+    });
+
+    $('#submitBtn').click(function(){
+        // alert($('#parname').val() + ' | '+ $('#childname').val())
+        var postlnk = "http://127.0.0.1:8000/" + func;
+        $.ajax({
+            type: 'POST',
+            url: postlnk,
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            timeout: 200,
+            data: JSON.stringify({
+                "parname": $('#parname').val(),
+                "childname": $('#childname').val(),
+                "childspouse": $('#childspouse').val(),
+                "grandchild": $('#grandchildren').val()
+            }),
+            success: function(data){
+                console.log("success:"+ data);
+                alert(data);
+            },
+            error: function(xmlhttp,errorText){
+                console.log("error:" + xmlhttp);
+                console.log("error2:" + errorText);
+                if(xmlhttp.status == "405") {
+                    alert("Invalid request!");
+                } else if(xmlhttp.status == "404") {
+                    alert("Resource not found!");
+                } else if(xmlhttp.status == "500") {
+                    alert("Internal error!");
+                } else {
+                    alert("Other Exceptions!");
+                }
+            }
+        });
+
+    })
+
+});
 
 </script>
 </body>
