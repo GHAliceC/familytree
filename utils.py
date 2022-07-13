@@ -59,7 +59,10 @@ class Utils:
                 for n in range(len(lst)):
                     print("n: ", n)
                     for person in lst[n]:
-                        line += person.name + " + " + person.spouse + "\n"
+                        line += person.name
+                        if not person.spouse:
+                            person.spouse = "?"
+                        line += " + " + person.spouse + "\n"
                         if person.child != []:
                             line += " c: "
                             for ch in person.child:
@@ -67,7 +70,7 @@ class Utils:
                             line = line[:-2] + "\n"
                         line += f" n: This is generation {n} in Lin's family\n"
                         line += person.name + "\n"
-                        line += " l: ? - ?\n"
+                        line += " l: " + person.bdate + " - " + person.ddate + "\n"
                         line += " n: put other info. here\n"
                 print("line: \n", line)
                 f.write(line)
