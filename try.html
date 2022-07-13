@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
+<head>
 <meta charset="UTF-8">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no cache, must-revailidate">
+<meta http-equiv="expires" content="0">
 <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
@@ -11,9 +15,7 @@
 
 <!-- Ajax文件 -->
 <script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<style>
-
-</style>
+</head>
 <body>
 <div class="container" style="width: 600px;">
     <div style=" text-align: center;">
@@ -150,14 +152,7 @@ $(document).ready(function(){
     });
 
     $('#viewGraphBtn').click(function(){
-        var postlnk = "http://127.0.0.1:8000/view";
-        $.ajax({
-        type: 'POST',
-        url: postlnk,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        timeout: 200
-        })
+        window.open("http://127.0.0.1:8000/view", '_blank');
     });
 
     $('#submitBtn').click(function(){
@@ -172,8 +167,11 @@ $(document).ready(function(){
             data: JSON.stringify({
                 "parname": $('#parname').val(),
                 "childname": $('#childname').val(),
+                "newname": $('#newchildname').val(),
                 "childspouse": $('#childspouse').val(),
-                "grandchild": $('#grandchildren').val()
+                "grandchild": $('#grandchildren').val(),
+                "bdate": $('#birthdate').val(),
+                "ddate": $('#deathdate').val()
             }),
             success: function(data){
                 console.log("success:"+ data);
