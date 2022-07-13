@@ -1,18 +1,25 @@
-from flask import Flask, request, jsonify, render_template, send_from_directory
+from flask import Flask, request, render_template, send_from_directory
 from flask_cors import CORS
-from member import Node
 from treeOps import TreeOps
 
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
 @app.route("/")
+def front_page():
+    return render_template("try.html")
+
+@app.route("/view", methods=['GET'])
 def renderer():
     return render_template("index.html")
 
-@app.route("/linfamily.txt")
+@app.route("/linfamily.txt", methods=['GET'])
 def get_file():
     return send_from_directory('static', "linfamily.txt")
+
+@app.route("/info-icon.png")
+def get_icon():
+    return send_from_directory('static', "info-icon.png")
 
 @app.route("/addMember", methods=['GET', 'POST'])
 def addMember():
@@ -42,10 +49,11 @@ def editMember():
     method = request.method
     if method == 'POST':
         param = request.get_json()
+        print(param)
         try:
             tOps = TreeOps()
             parNode = tOps.findparent(**param)
-            res = tOps.editchild(parNode, **param)
+            res = tOps.editnode(parNode, **param)
             if res:
                 return "success"
             else:
