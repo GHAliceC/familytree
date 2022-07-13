@@ -63,14 +63,16 @@ class TreeOps(Utils):
         if parent is None:
             return False
 
+        print("parent: ", parent.name, parent.spouse)
+        print("member: ", childname, newname, childspouse, bdate, ddate)
         for ch in parent.child:
             if ch.name == childname:
                 ch.name = newname
-                if not bdate:
+                if bdate != "" and bdate != ch.bdate:
                     ch.bdate = bdate
-                if not ddate:
+                if ddate != "" and ddate != ch.ddate:
                     ch.ddate = ddate
-                if not childspouse:
+                if childspouse != "" and childspouse != ch.spouse:
                     ch.spouse = childspouse
 
         self.storeTree(self.root)
@@ -85,6 +87,7 @@ class TreeOps(Utils):
         if parent is None:
             return False
 
+        print(parent.child, childname)
         numOfchild = len(parent.child)
         noOfchild = -1
         for idx in range(numOfchild):
@@ -94,8 +97,7 @@ class TreeOps(Utils):
 
         if idx != -1:
             parent.child.pop(idx)
+            self.storeTree(self.root)
             return True
-
-        self.storeTree(self.root)
 
         return False
